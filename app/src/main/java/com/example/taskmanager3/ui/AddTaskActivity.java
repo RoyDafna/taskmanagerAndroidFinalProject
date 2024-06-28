@@ -13,8 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.taskmanager3.R;
+import com.example.taskmanager3.taskDB.FirestoreHelper;
 import com.example.taskmanager3.taskDB.Task;
-import com.example.taskmanager3.taskDB.TaskDatabase;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -66,10 +66,21 @@ public class AddTaskActivity extends AppCompatActivity {
             String taskDetails = editTextTaskDetails.getText().toString();
 
             Task newTask = new Task(taskTitle, taskDetails, false);
-            TaskDatabase db = TaskDatabase.getInstance(this);
-            db.taskDao().insertTask(newTask);
 
-            finish();
+            FirestoreHelper firestoreHelper = new FirestoreHelper();
+            firestoreHelper.addTask(newTask, new FirestoreHelper.OnTaskAddedListener() {
+                @Override
+                public void onSuccess(Task task) {
+                    // Task added successfully
+                    finish(); // Close the activity
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    // Handle failure
+                    e.printStackTrace();
+                }
+            });
         });
     }
 }
