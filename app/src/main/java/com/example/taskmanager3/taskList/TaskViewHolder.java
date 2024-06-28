@@ -35,7 +35,8 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
                 // Update the task in Firestore
                 firestoreHelper.updateTaskCompletion(clickedTask.getId(), clickedTask.isCompleted(), new FirestoreHelper.OnTaskUpdateListener() {
                     @Override
-                    public void onSuccess() {
+                    public void
+                    onSuccess() {
                         if (clickedTask.isCompleted()) {
                             getImageViewCheckMark().setImageResource(R.drawable.task_checked);
                         } else {

@@ -6,14 +6,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.taskmanager3.R;
 import com.example.taskmanager3.taskDB.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -25,13 +22,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_task_details);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         TextView titleTextView = findViewById(R.id.textViewTitle);
         TextView descriptionTextView = findViewById(R.id.textViewDetails);
@@ -44,7 +35,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
             String taskId = intent.getStringExtra("TASK_ID");
             if (taskId != null) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference taskRef = db.collection("tasks").document(taskId);
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String userId = auth.getCurrentUser().getUid();
+                DocumentReference taskRef = db.collection("users").document(userId).collection("tasks").document(taskId);
 
                 registration = taskRef.addSnapshotListener((documentSnapshot, e) -> {
                     if (e != null) {

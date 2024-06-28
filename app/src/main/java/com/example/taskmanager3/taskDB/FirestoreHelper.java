@@ -1,35 +1,46 @@
 package com.example.taskmanager3.taskDB;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import android.os.Debug;
+import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirestoreHelper {
 
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     public FirestoreHelper() {
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
     }
 
     public void addTask(Task task, OnTaskAddedListener listener) {
-        db.collection("tasks")
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("users").document(userId).collection("tasks")
                 .add(task)
                 .addOnSuccessListener(documentReference -> {
-                    task.setId(documentReference.getId());
-                    listener.onSuccess(task);
+                    String taskId = documentReference.getId();
+                    task.setId(taskId);
+                    documentReference.set(task)
+                            .addOnSuccessListener(aVoid -> listener.onSuccess(task))
+                            .addOnFailureListener(e -> listener.onFailure(e));
                 })
                 .addOnFailureListener(e -> listener.onFailure(e));
     }
 
     public void updateTaskCompletion(String taskId, boolean isCompleted, OnTaskUpdateListener listener) {
-        db.collection("tasks").document(taskId)
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("users").document(userId).collection("tasks").document(taskId)
                 .update("completed", isCompleted)
                 .addOnSuccessListener(aVoid -> listener.onSuccess())
                 .addOnFailureListener(e -> listener.onFailure(e));
     }
 
     public void getTaskById(String taskId, OnTaskFetchedListener listener) {
-        db.collection("tasks").document(taskId)
+        String userId = auth.getCurrentUser().getUid();
+        db.collection("users").document(userId).collection("tasks").document(taskId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     Task task = documentSnapshot.toObject(Task.class);

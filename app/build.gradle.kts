@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(libs.firebase.common)
+    implementation(libs.firebase.auth)
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
@@ -47,5 +48,6 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation ("com.google.firebase:firebase-firestore:24.3.1")
+    implementation ("com.google.firebase:firebase-auth")
 
 }
