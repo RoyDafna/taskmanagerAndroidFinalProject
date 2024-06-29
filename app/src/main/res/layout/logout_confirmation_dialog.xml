@@ -37,8 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:textColor="@android:color/white"
-            android:background="@color/primaryTaskColor" />
+            android:textColor="@android:color/darker_gray"
+            android:backgroundTint="@color/primaryTaskColor"
+            />
 
     </LinearLayout>
 

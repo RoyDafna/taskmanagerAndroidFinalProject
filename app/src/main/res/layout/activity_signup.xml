@@ -12,15 +12,18 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/primaryTaskColor"
         android:hint="Email"
         app:boxStrokeColor="@color/primaryTaskColor"
-        app:boxStrokeWidth="2dp">
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/primaryTaskColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -29,26 +32,50 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@color/primaryTaskColor"
         android:hint="Password"
         app:boxStrokeColor="@color/primaryTaskColor"
-        app:boxStrokeWidth="2dp">
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/primaryTaskColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@android:color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutConfirmPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/primaryTaskColor"
+        android:hint="Confirm Password"
+        app:boxStrokeColor="@color/primaryTaskColor"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/primaryTaskColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSignup"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Signup"
-        android:textColor="@color/primaryTaskColor"
-        app:strokeColor="@color/primaryTaskColor"
-        app:strokeWidth="2dp" />
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/primaryTaskColor"
+        app:cornerRadius="8dp" />
 
 </LinearLayout>

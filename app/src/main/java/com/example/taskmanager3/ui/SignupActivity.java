@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText editTextEmail, editTextPassword;
+    private EditText editTextEmail, editTextPassword, editTextConfirmPassword;
     private Button buttonSignup;
 
     @Override
@@ -25,6 +25,7 @@ public class SignupActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         buttonSignup = findViewById(R.id.buttonSignup);
 
         buttonSignup.setOnClickListener(v -> createUser());
@@ -33,6 +34,31 @@ public class SignupActivity extends AppCompatActivity {
     private void createUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+
+        if (email.isEmpty()) {
+            editTextEmail.setError("Email is required");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            editTextPassword.setError("Password is required");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        if (confirmPassword.isEmpty()) {
+            editTextConfirmPassword.setError("Confirm Password is required");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            editTextConfirmPassword.setError("Passwords do not match");
+            editTextConfirmPassword.requestFocus();
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {

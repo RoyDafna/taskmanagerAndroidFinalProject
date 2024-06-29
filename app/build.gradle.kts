@@ -50,4 +50,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:24.3.1")
     implementation ("com.google.firebase:firebase-auth")
 
+    implementation ("com.google.android.material:material:1.6.0")
+
+
 }
