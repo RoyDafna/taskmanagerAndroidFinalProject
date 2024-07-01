@@ -6,4 +6,12 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="you_have_no_tasks">You have no tasks! 🎉\nEnjoy your day or add a new task</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="logout_text">Are you sure you want to logout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
 </resources>
